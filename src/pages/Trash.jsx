@@ -54,7 +54,7 @@ const Trash = () => {
 
   const TableHeader = () => (
     <thead className="border-b border-gray-300">
-      <tr className="text-black text-center">
+      <tr className="text-black text-center md:text-left">
         <th className="p-2">Task Title</th>
         <th className="p-2">Priority</th>
         <th className="p-2">Stage</th>

@@ -33,7 +33,7 @@ const Table = ({ tasks }) => {
 
   const TableHeader = () => (
     <thead className="w-full border-b border-gray-300">
-      <tr className="w-full text-black text-center">
+      <tr className="w-full text-black text-center md:text-left">
         <th className="py-2">Task Title</th>
         <th className="py-2">Priority</th>
         <th className="py-2">Created</th>

@@ -29,7 +29,7 @@ const Users = () => {
 
   const TableHeader = () => (
     <thead className="border-b border-gray-300">
-      <tr className="text-black text-center">
+      <tr className="text-black text-center md:text-left">
         <th className="py-2">Full Name</th>
         <th className="py-2">Title</th>
         <th className="py-2">Email</th>
