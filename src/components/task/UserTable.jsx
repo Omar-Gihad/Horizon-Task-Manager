@@ -10,27 +10,27 @@ const UserTable = ({ users }) => {
       <tr className="text-black  text-left">
         <th className="py-2">Full Name</th>
         <th className="py-2">Status</th>
-        <th className="py-2">Created At</th>
+        <th className="py-2">Created</th>
       </tr>
     </thead>
   );
 
   const TableRow = ({ user }) => (
-    <tr className="border-b border-gray-200  text-gray-600 hover:bg-gray-400/10">
+    <tr className=" border-b border-gray-200  text-gray-600 hover:bg-gray-400/10">
       <td className="py-2">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-full text-white flex items-center justify-center text-sm bg-blue-600">
             <span className="text-center">{getInitials(user?.name)}</span>
           </div>
 
-          <div>
-            <p> {user.name}</p>
+          <div className="flex-1">
+            <p className="line-clamp-1"> {user.name}</p>
             <span className="text-xs text-black">{user?.role}</span>
           </div>
         </div>
       </td>
 
-      <td>
+      <td className="w-1/3">
         <p
           className={clsx(
             "w-fit px-3 py-1 rounded-full text-sm",

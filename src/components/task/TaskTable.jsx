@@ -20,9 +20,9 @@ const TaskTable = ({ tasks }) => {
   const TableHeader = () => (
     <thead className="border-b border-gray-300 ">
       <tr className="text-black text-left">
-        <th className="py-2">Task Title</th>
-        <th className="py-2">Priority</th>
-        <th className="py-2">Team</th>
+        <th className="w-1/3 py-2">Task Title</th>
+        <th className="w-1/3 px-3 py-2">Priority</th>
+        <th className="w-1/3 py-2">Team</th>
         <th className="py-2 hidden md:block">Created At</th>
       </tr>
     </thead>
@@ -30,18 +30,18 @@ const TaskTable = ({ tasks }) => {
 
   const TableRow = ({ task }) => (
     <tr className="border-b border-gray-300 text-gray-600 hover:bg-gray-300/10">
-      <td className="py-2">
-        <div className="flex items-center gap-2">
+      <td className="py-2 w-1/3">
+        <div className="flex items-center gap-1 ">
           <div
             className={clsx("w-4 h-4 rounded-full", TASK_TYPE[task.stage])}
           />
 
-          <p className="text-base text-black">{task.title}</p>
+          <p className="text-sm text-black flex-1 line-clamp-2">{task.title}</p>
         </div>
       </td>
 
-      <td className="py-2">
-        <div className="flex gap-1 items-center">
+      <td className="py-2 w-1/3">
+        <div className="flex gap-1 items-center px-3">
           <span className={clsx("text-lg", PRIOTITYSTYELS[task.priority])}>
             {ICONS[task.priority]}
           </span>
@@ -49,9 +49,9 @@ const TaskTable = ({ tasks }) => {
         </div>
       </td>
 
-      <td className="py-2">
+      <td className="py-2 px-1 w-1/3">
         <div className="flex">
-          {task.team.map((m, index) => (
+          {task.team.map((item, index) => (
             <div
               key={index}
               className={clsx(
@@ -59,7 +59,7 @@ const TaskTable = ({ tasks }) => {
                 BGS[index % BGS.length]
               )}
             >
-              <UserInfo user={m} />
+              <UserInfo user={item} />
             </div>
           ))}
         </div>

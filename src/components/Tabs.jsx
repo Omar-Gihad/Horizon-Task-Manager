@@ -8,7 +8,7 @@ export default function Tabs({ tabs, setSelected, children }) {
   return (
     <div className="w-full px-1 sm:px-0">
       <Tab.Group>
-        <Tab.List className="flex space-x-6 rounded-xl p-1">
+        <Tab.List className="flex justify-between md:justify-start md:space-x-6  rounded-xl md:p-1">
           {tabs.map((tab, index) => (
             <Tab
               key={tab.title}

@@ -29,7 +29,7 @@ const Users = () => {
 
   const TableHeader = () => (
     <thead className="border-b border-gray-300">
-      <tr className="text-black text-left">
+      <tr className="text-black text-center">
         <th className="py-2">Full Name</th>
         <th className="py-2">Title</th>
         <th className="py-2">Email</th>
@@ -44,7 +44,7 @@ const Users = () => {
       <td className="p-2">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-full text-white flex items-center justify-center text-sm bg-blue-700">
-            <span className="text-xs md:text-sm text-center">
+            <span className="text-xs md:text-sm text-center p-5">
               {getInitials(user.name)}
             </span>
           </div>

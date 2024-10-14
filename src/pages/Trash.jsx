@@ -54,11 +54,11 @@ const Trash = () => {
 
   const TableHeader = () => (
     <thead className="border-b border-gray-300">
-      <tr className="text-black  text-left">
-        <th className="py-2">Task Title</th>
-        <th className="py-2">Priority</th>
-        <th className="py-2">Stage</th>
-        <th className="py-2 line-clamp-1">Modified On</th>
+      <tr className="text-black text-center">
+        <th className="p-2">Task Title</th>
+        <th className="p-2">Priority</th>
+        <th className="p-2">Stage</th>
+        <th className="p-2">Modified</th>
       </tr>
     </thead>
   );
@@ -70,13 +70,13 @@ const Trash = () => {
           <div
             className={clsx("w-4 h-4 rounded-full", TASK_TYPE[item.stage])}
           />
-          <p className="w-full line-clamp-2 text-base text-black">
+          <p className="w-full line-clamp-2 text-base text-black flex-1">
             {item?.title}
           </p>
         </div>
       </td>
 
-      <td className="py-2 capitalize">
+      <td className="py-2 px-2 capitalize">
         <div className={"flex gap-1 items-center"}>
           <span className={clsx("text-lg", PRIOTITYSTYELS[item?.priority])}>
             {ICONS[item?.priority]}
@@ -85,7 +85,7 @@ const Trash = () => {
         </div>
       </td>
 
-      <td className="py-2 capitalize text-center md:text-start">
+      <td className="py-2 px-2 capitalize text-center md:text-start">
         {item?.stage}
       </td>
       <td className="py-2 text-sm">{new Date(item?.date).toDateString()}</td>
