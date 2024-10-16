@@ -37,7 +37,7 @@ function Layout() {
       </div>
     </div>
   ) : (
-    <Navigate to="/log-in" state={{ from: location }} replace />
+    <Navigate to="/login" state={{ from: location }} replace />
   );
 }
 
@@ -100,9 +100,8 @@ function App() {
           <Route index path="/" element={<Navigate to="/login" />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/tasks" element={<Tasks />} />
-          <Route path="/completed/:status" element={<Tasks />} />
-          <Route path="/in-progress/:status" element={<Tasks />} />
-          <Route path="/todo/:status" element={<Tasks />} />
+          <Route path="/:status" element={<Tasks />} />
+
           <Route path="/team" element={<Users />} />
           <Route path="/trashed" element={<Trash />} />
           <Route path="/task/:id" element={<TaskDetails />} />

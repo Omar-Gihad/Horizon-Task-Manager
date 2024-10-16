@@ -7,7 +7,7 @@ import {
   MdKeyboardDoubleArrowUp,
   MdOutlineRestore,
 } from "react-icons/md";
-import { tasks } from "../assets/data";
+import { useGetTasksQuery } from "../redux/slices/apiSlice";
 import Title from "../components/Title";
 import Button from "../components/Button";
 import { PRIOTITYSTYELS, TASK_TYPE } from "../utils";
@@ -26,6 +26,17 @@ const Trash = () => {
   const [msg, setMsg] = useState(null);
   const [type, setType] = useState("delete");
   const [selected, setSelected] = useState("");
+
+  // Fetch tasks using RTK Query
+  const { data: tasksData, isLoading, error } = useGetTasksQuery();
+
+  // Check loading and error states
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Failed to load tasks.</div>;
+
+  // Extract tasks from the fetched data
+  const tasks = tasksData?.tasks || [];
+  console.log("🚀 ~ Trash ~ tasks:", tasks)
 
   const deleteAllClick = () => {
     setType("deleteAll");

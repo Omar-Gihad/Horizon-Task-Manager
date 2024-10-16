@@ -13,6 +13,7 @@ import { FaList } from "react-icons/fa";
 import UserInfo from "../UserInfo";
 import Button from "../Button";
 import ConfirmatioDialog from "../Dialogs";
+import { useSelector } from "react-redux";
 
 const ICONS = {
   high: <MdKeyboardDoubleArrowUp />,
@@ -21,6 +22,8 @@ const ICONS = {
 };
 
 const Table = ({ tasks }) => {
+  const { user } = useSelector((state) => state.auth);
+
   const [openDialog, setOpenDialog] = useState(false);
   const [selected, setSelected] = useState(null);
 
@@ -113,12 +116,14 @@ const Table = ({ tasks }) => {
           type='button'
         /> */}
 
-        <Button
-          className="text-red-700 hover:text-red-500 sm:px-0 text-sm md:text-base"
-          label="Delete"
-          type="button"
-          onClick={() => deleteClicks(task._id)}
-        />
+        {user.data.user.isAdmin && (
+          <Button
+            className="text-red-700 hover:text-red-500 sm:px-0 text-sm md:text-base"
+            label="Delete"
+            type="button"
+            onClick={() => deleteClicks(task._id)}
+          />
+        )}
       </td>
     </tr>
   );

@@ -25,17 +25,17 @@ const linkData = [
   },
   {
     label: "Completed",
-    link: "completed/completed",
+    link: "completed",
     icon: <MdTaskAlt />,
   },
   {
     label: "In Progress",
-    link: "in-progress/in progress",
+    link: "in progress",
     icon: <MdOutlinePendingActions />,
   },
   {
     label: "To Do",
-    link: "todo/todo",
+    link: "todo",
     icon: <MdOutlinePendingActions />,
   },
   {
@@ -58,7 +58,7 @@ const Sidebar = () => {
 
   const path = location.pathname.split("/")[1];
 
-  const sidebarLinks = user?.isAdmin ? linkData : linkData.slice(0, 5);
+  const sidebarLinks = user.data.user.isAdmin ? linkData : linkData.slice(0, 5);
 
   const closeSidebar = () => {
     dispatch(setOpenSidebar(false));

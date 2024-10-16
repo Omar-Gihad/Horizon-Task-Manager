@@ -12,6 +12,7 @@ const UserAvatar = () => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const fullName = user.data.user.name;
 
   const logoutHandler = () => {
     console.log("logout");
@@ -24,7 +25,7 @@ const UserAvatar = () => {
           <div>
             <Menu.Button className="w-10 h-10 2xl:w-12 2xl:h-12 items-center justify-center rounded-full bg-[#6b43dd]">
               <span className="text-white font-semibold">
-                {getInitials(user?.name)}
+                {getInitials(fullName)}
               </span>
             </Menu.Button>
           </div>

@@ -7,7 +7,7 @@ import {
 
 import moment from "moment";
 import clsx from "clsx";
-import { BGS, PRIOTITYSTYELS, TASK_TYPE, getInitials } from "../../utils";
+import { BGS, PRIOTITYSTYELS, TASK_TYPE } from "../../utils";
 import UserInfo from "../../components/UserInfo";
 
 const TaskTable = ({ tasks }) => {
@@ -20,17 +20,17 @@ const TaskTable = ({ tasks }) => {
   const TableHeader = () => (
     <thead className="border-b border-gray-300 ">
       <tr className="text-black text-left">
-        <th className="w-1/3 py-2">Task Title</th>
-        <th className="w-1/3 px-3 py-2">Priority</th>
-        <th className="w-1/3 py-2">Team</th>
-        <th className="py-2 hidden md:block">Created At</th>
+        <th className="w-1/3 md:w-auto py-2">Task Title</th>
+        <th className="w-1/3 md:w-auto px-3 py-2">Priority</th>
+        <th className="w-1/3 md:w-auto py-2">Team</th>
+        <th className="py-2 hidden md:block">Created</th>
       </tr>
     </thead>
   );
 
   const TableRow = ({ task }) => (
     <tr className="border-b border-gray-300 text-gray-600 hover:bg-gray-300/10">
-      <td className="py-2 w-1/3">
+      <td className="py-2 w-1/3 md:w-auto">
         <div className="flex items-center gap-1 ">
           <div
             className={clsx("w-4 h-4 rounded-full", TASK_TYPE[task.stage])}
@@ -40,7 +40,7 @@ const TaskTable = ({ tasks }) => {
         </div>
       </td>
 
-      <td className="py-2 w-1/3">
+      <td className="py-2 w-1/3 md:w-auto">
         <div className="flex gap-1 items-center px-3">
           <span className={clsx("text-lg", PRIOTITYSTYELS[task.priority])}>
             {ICONS[task.priority]}
@@ -49,20 +49,20 @@ const TaskTable = ({ tasks }) => {
         </div>
       </td>
 
-      <td className="py-2 px-1 w-1/3">
-        <div className="flex">
-          {task.team.map((item, index) => (
+      <td className="py-2 px-1 w-1/3 md:w-auto">
+        {/* <div className="flex">
+          {task?.team.map((item, index) => (
             <div
               key={index}
               className={clsx(
                 "w-7 h-7 rounded-full text-white flex items-center justify-center text-sm -mr-1",
-                BGS[index % BGS.length]
+                BGS[index]
               )}
             >
               <UserInfo user={item} />
             </div>
           ))}
-        </div>
+        </div> */}
       </td>
       <td className="py-2 hidden md:block">
         <span className="text-base text-gray-600">

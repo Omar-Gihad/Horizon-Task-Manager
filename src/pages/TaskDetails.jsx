@@ -12,14 +12,15 @@ import {
   MdTaskAlt,
 } from "react-icons/md";
 import { RxActivityLog } from "react-icons/rx";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
-import { tasks } from "../assets/data";
+import { useGetTasksQuery } from "../redux/slices/apiSlice";
+
 import Tabs from "../components/Tabs";
 import { PRIOTITYSTYELS, TASK_TYPE, getInitials } from "../utils";
 import Loading from "../components/Loader";
 import Button from "../components/Button";
-
+import { BiArrowBack } from "react-icons/bi";
 
 const ICONS = {
   high: <MdKeyboardDoubleArrowUp />,
@@ -81,14 +82,35 @@ const act_types = [
 ];
 
 const TaskDetails = () => {
+  // Fetch tasks using RTK Query
+  const { data: tasksData, isLoading, error } = useGetTasksQuery();
+
+  // Check loading and error states
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Failed to load tasks.</div>;
+
+  // Extract tasks from the fetched data
+  const tasks = tasksData?.tasks || [];
+
   const { id } = useParams();
 
+  const nav = useNavigate();
+
   const [selected, setSelected] = useState(0);
+
   const task = tasks.find((item) => item._id == id);
 
   return (
     <div className="w-full flex flex-col gap-3 mb-4 overflow-y-hidden">
-      <h1 className="text-2xl text-gray-600 font-bold">{task?.title}</h1>
+      <h1 className="text-2xl text-gray-600 font-bold">
+        <span className="pr-2">
+          <BiArrowBack
+            className="cursor-pointer inline"
+            onClick={() => nav("/tasks")}
+          />
+        </span>{" "}
+        {task?.title}
+      </h1>
 
       <Tabs tabs={TABS} setSelected={setSelected}>
         {selected === 0 ? (

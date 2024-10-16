@@ -1,29 +1,42 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import Textbox from "../components/Textbox";
-import { useSelector } from "react-redux";
-import { assets } from "../assets/assets";
 import { IoLogoApple } from "react-icons/io5";
 import { FaGoogle } from "react-icons/fa";
-import { useEffect } from "react";
+import { login } from "../redux/slices/authSlice.js"; // Import login action
+import { assets } from "../assets/assets";
 
 const Login = () => {
-  const { user } = useSelector((state) => state.auth);
+  const { user, isLoading, error } = useSelector((state) => state.auth); // Add loading and error states
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const submitHandler = async (data) => {
-    navigate("/dashboard");
-    console.log("submit");
+    // Dispatch login action
+    dispatch(login(data))
+      .unwrap()
+      .then(() => {
+        // Navigate after successful login
+        navigate("/dashboard");
+      })
+      .catch((err) => {
+        console.error("Login failed: ", err);
+      });
   };
 
   useEffect(() => {
-    // user && navigate("/dashboard");
+    if (user) {
+      navigate("/dashboard");
+    }
   }, [user, navigate]);
+  console.log("🚀 ~ Login ~ user:", user);
 
   return (
     <div className="px-6 md:px-20 lg:px-40 py-6 flex flex-col lg:flex-row gap-6 min-h-screen">
@@ -90,9 +103,12 @@ const Login = () => {
             type="submit"
             className="mb-12 w-full bg-[#6b43dd] text-white font-semibold text-lg p-2 rounded-lg hover:bg-[#35148f] transition-all duration-300"
           >
-            Login
+            {isLoading ? "Logging in..." : "Login"}
           </button>
         </form>
+
+        {/* Show error message if login fails */}
+        {error && <p className="text-red-500 mt-2">{error}</p>}
       </div>
 
       {/* Right section */}
@@ -111,7 +127,7 @@ const Login = () => {
         </div>
         <div className="overflow-hidden pl-12 absolute right-[-280px] bottom-[0px] z-0">
           <img
-            className="blur-[2px] rounded-t-xl object-cover w-[3641px] h-auto shadow-md   transition-all duration-1000 hover:blur-none "
+            className="blur-[2px] rounded-t-xl object-cover w-[3641px] h-auto shadow-md transition-all duration-1000 hover:blur-none "
             src={assets.LogDashImg}
             alt="Task Management Dashboard"
           />
