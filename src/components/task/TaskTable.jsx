@@ -50,7 +50,7 @@ const TaskTable = ({ tasks }) => {
       </td>
 
       <td className="py-2 px-1 w-1/3 md:w-auto">
-        {/* <div className="flex">
+        <div className="flex">
           {task?.team.map((item, index) => (
             <div
               key={index}
@@ -62,7 +62,7 @@ const TaskTable = ({ tasks }) => {
               <UserInfo user={item} />
             </div>
           ))}
-        </div> */}
+        </div>
       </td>
       <td className="py-2 hidden md:block">
         <span className="text-base text-gray-600">

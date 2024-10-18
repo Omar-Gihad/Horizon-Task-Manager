@@ -42,10 +42,11 @@ const Tasks = () => {
 
   // Check loading and error states
   if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Failed to load tasks.</div>;
+  if (!error) return <div>Failed to load tasks.</div>;
 
   // Extract tasks from the fetched data
   const tasks = tasksData?.tasks || [];
+  console.log("🚀 ~ Tasks ~ tasks:", tasks)
 
   const filteredTasks = tasks.filter((el) => {
     if (status) {

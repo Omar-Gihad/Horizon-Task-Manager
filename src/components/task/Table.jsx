@@ -14,6 +14,7 @@ import UserInfo from "../UserInfo";
 import Button from "../Button";
 import ConfirmatioDialog from "../Dialogs";
 import { useSelector } from "react-redux";
+import { useUpdateTaskMutation } from "../../redux/slices/apiSlice"; 
 
 const ICONS = {
   high: <MdKeyboardDoubleArrowUp />,
@@ -27,12 +28,28 @@ const Table = ({ tasks }) => {
   const [openDialog, setOpenDialog] = useState(false);
   const [selected, setSelected] = useState(null);
 
+  // Initialize the mutation
+  const [updateTask] = useUpdateTaskMutation();
+
   const deleteClicks = (id) => {
     setSelected(id);
     setOpenDialog(true);
   };
 
-  const deleteHandler = () => {};
+  const deleteHandler = async () => {
+    const deletedTask = tasks.find((item) => item._id === selected);
+    if (deletedTask) {
+      try {
+        // Update the task's isTrashed property to true
+        await updateTask({ id: selected, isTrashed: true });
+        toast.success("Task moved to trash successfully!");
+      } catch (error) {
+        toast.error("Failed to move task to trash.");
+        console.error("Error updating task:", error);
+      }
+    }
+    setOpenDialog(false);
+  };
 
   const TableHeader = () => (
     <thead className="w-full border-b border-gray-300">
@@ -50,9 +67,7 @@ const Table = ({ tasks }) => {
     <tr className="border-b border-gray-200 text-gray-600 hover:bg-gray-300/10">
       <td className="py-2">
         <div className="flex items-center gap-2">
-          <div
-            className={clsx("w-4 h-4 rounded-full", TASK_TYPE[task.stage])}
-          />
+          <div className={clsx("w-4 h-4 rounded-full", TASK_TYPE[task.stage])} />
           <p className="w-full line-clamp-2 flex-1 text-base text-black">
             {task?.title}
           </p>
@@ -110,12 +125,6 @@ const Table = ({ tasks }) => {
       </td>
 
       <td className="py-2 flex gap-2 md:gap-4 justify-">
-        {/* <Button
-          className='text-blue-600 hover:text-blue-500 sm:px-0 text-sm md:text-base'
-          label='Edit'
-          type='button'
-        /> */}
-
         {user.data.user.isAdmin && (
           <Button
             className="text-red-700 hover:text-red-500 sm:px-0 text-sm md:text-base"
@@ -127,6 +136,7 @@ const Table = ({ tasks }) => {
       </td>
     </tr>
   );
+
   return (
     <>
       <div className="bg-white  px-2 md:px-4 pt-4 pb-9 shadow-md rounded">
@@ -142,7 +152,6 @@ const Table = ({ tasks }) => {
         </div>
       </div>
 
-      {/* TODO */}
       <ConfirmatioDialog
         open={openDialog}
         setOpen={setOpenDialog}

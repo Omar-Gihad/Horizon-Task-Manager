@@ -6,7 +6,7 @@ const baseQuery = fetchBaseQuery({ baseUrl: API_URI });
 
 export const apiSlice = createApi({
   baseQuery,
-  tagTypes: ['User', 'Task'],
+  tagTypes: ["User", "Task"],
   endpoints: (builder) => ({
     // Authentication Endpoints
     loginUser: builder.mutation({
@@ -15,7 +15,7 @@ export const apiSlice = createApi({
         method: "POST",
         body: credentials,
       }),
-      invalidatesTags: ['User'],
+      invalidatesTags: ["User"],
     }),
     registerUser: builder.mutation({
       query: (user) => ({
@@ -23,14 +23,14 @@ export const apiSlice = createApi({
         method: "POST",
         body: user,
       }),
-      invalidatesTags: ['User'],
+      invalidatesTags: ["User"],
     }),
     logoutUser: builder.mutation({
       query: () => ({
         url: "/user/logout",
         method: "POST",
       }),
-      invalidatesTags: ['User'],
+      invalidatesTags: ["User"],
     }),
     // Task Endpoints
     createTask: builder.mutation({
@@ -39,11 +39,11 @@ export const apiSlice = createApi({
         method: "POST",
         body: task,
       }),
-      invalidatesTags: ['Task'],
+      invalidatesTags: ["Task"],
     }),
     getTasks: builder.query({
       query: () => "/task",
-      providesTags: ['Task'],
+      providesTags: ["Task"],
     }),
     updateTask: builder.mutation({
       query: ({ id, ...updatedTask }) => ({
@@ -51,14 +51,14 @@ export const apiSlice = createApi({
         method: "PUT",
         body: updatedTask,
       }),
-      invalidatesTags: ['Task'],
+      invalidatesTags: ["Task"],
     }),
     deleteTask: builder.mutation({
       query: (id) => ({
         url: `/task/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ['Task'],
+      invalidatesTags: ["Task"],
     }),
   }),
 });
